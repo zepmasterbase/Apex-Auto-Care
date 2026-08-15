@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Apex Auto Care — modern automotive service, diagnostics and repairs." />
+  <meta name="theme-color" content="#0b0d0f" />
+  <title>Apex Auto Care | Your Car. Our Expertise.</title>
+  <style>
+    :root{
+      --bg:#080a0c;
+      --surface:#101317;
+      --surface-2:#15191e;
+      --line:#252a30;
+      --text:#f4f6f8;
+      --muted:#9ba3ad;
+      --accent:#c9ff32;
+      --accent-2:#a9df20;
+      --danger:#ff5d57;
+      --radius:22px;
+      --shadow:0 22px 60px rgba(0,0,0,.35);
+      --max:1180px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:var(--bg);color:var(--text);line-height:1.5;
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    .container{width:min(var(--max),calc(100% - 40px));margin:auto}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;color:var(--accent);
+      text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;font-weight:800;
+    }
+    .eyebrow::before{content:"";width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 16px var(--accent)}
+    .section{padding:96px 0}
+    .section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:42px}
+    h1,h2,h3{line-height:1.04;letter-spacing:-.045em}
+    h2{font-size:clamp(2.1rem,5vw,4rem);max-width:720px}
+    .lead{color:var(--muted);max-width:620px;font-size:1.05rem}
+    .btn{
+      border:1px solid var(--line);padding:14px 20px;border-radius:999px;
+      display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:800;
+      transition:.2s ease;background:var(--surface-2);color:var(--text);
+    }
+    .btn:hover{transform:translateY(-2px);border-color:#424952}
+    .btn-primary{background:var(--accent);color:#0a0d0a;border-color:var(--accent)}
+    .btn-primary:hover{background:var(--accent-2);border-color:var(--accent-2);box-shadow:0 10px 30px rgba(201,255,50,.15)}
+    .btn-small{padding:10px 15px;font-size:.9rem}
+
+    /* Header */
+    header{
+      position:fixed;top:0;left:0;right:0;z-index:50;
+      background:rgba(8,10,12,.78);backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(255,255,255,.05)
+    }
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:950;letter-spacing:-.04em}
+    .brand-mark{
+      width:38px;height:38px;border-radius:12px;background:var(--accent);color:#090b09;
+      display:grid;place-items:center;font-size:20px;font-weight:950;
+      box-shadow:0 0 25px rgba(201,255,50,.14)
+    }
+    .nav-links{display:flex;align-items:center;gap:27px;color:#c2c8ce;font-size:.92rem;font-weight:650}
+    .nav-links a:hover{color:var(--accent)}
+    .menu{display:none;background:none;border:0;color:white;font-size:25px}
+
+    /* Hero */
+    .hero{
+      min-height:790px;padding:150px 0 70px;display:grid;place-items:center;
+      position:relative;isolation:isolate;
+      background:
+        radial-gradient(circle at 75% 35%,rgba(201,255,50,.09),transparent 28%),
+        radial-gradient(circle at 15% 70%,rgba(80,100,120,.1),transparent 30%);
+    }
+    .hero::before{
+      content:"";position:absolute;inset:0;z-index:-2;
+      background:
+        linear-gradient(90deg,rgba(8,10,12,.98) 0%,rgba(8,10,12,.78) 48%,rgba(8,10,12,.25) 100%),
+        url("https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=1800&q=85") center/cover;
+      filter:saturate(.8);
+    }
+    .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,var(--bg),transparent 30%,rgba(8,10,12,.15))}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+    .hero h1{font-size:clamp(3.2rem,7vw,6.6rem);max-width:850px;margin:20px 0}
+    .hero h1 span{color:var(--accent)}
+    .hero-copy{font-size:1.15rem;color:#c0c6cc;max-width:620px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0}
+    .micro-trust{display:flex;gap:22px;flex-wrap:wrap;color:#aeb5bc;font-size:.86rem}
+    .micro-trust span{display:flex;align-items:center;gap:7px}
+    .micro-trust b{color:var(--accent)}
+    .booking-card{
+      background:rgba(15,18,22,.86);border:1px solid rgba(255,255,255,.11);
+      border-radius:28px;padding:25px;box-shadow:var(--shadow);backdrop-filter:blur(16px)
+    }
+    .booking-card h3{font-size:1.55rem;margin-bottom:7px}
+    .booking-card p{color:var(--muted);font-size:.9rem;margin-bottom:20px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field.full{grid-column:1/-1}
+    label{font-size:.75rem;color:#aab1b8;font-weight:700}
+    input,select,textarea{
+      width:100%;border:1px solid var(--line);background:#0b0e11;color:white;
+      border-radius:13px;padding:13px 14px;outline:none
+    }
+    input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(201,255,50,.08)}
+    textarea{min-height:80px;resize:vertical}
+    .form-note{font-size:.72rem;color:#737b84;margin-top:10px}
+
+    /* Trust */
+    .trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#0c0f12}
+    .trust-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+    .trust-item{padding:25px 18px;text-align:center;border-right:1px solid var(--line)}
+    .trust-item:last-child{border-right:0}
+    .trust-item strong{display:block;font-size:1.1rem}.trust-item span{font-size:.78rem;color:var(--muted)}
+
+    /* Services */
+    .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .service{
+      min-height:190px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+      padding:22px;display:flex;flex-direction:column;justify-content:space-between;transition:.22s ease
+    }
+    .service:hover{transform:translateY(-5px);border-color:#414850;background:var(--surface-2)}
+    .service-icon{font-size:30px}
+    .service h3{font-size:1.15rem;margin:22px 0 5px}
+    .service p{font-size:.82rem;color:var(--muted)}
+    .service .arrow{color:var(--accent);font-weight:900;margin-top:16px}
+
+    /* Problem selector */
+    .diagnostic{background:#0d1013;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+    .problem{
+      border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:20px;
+      text-align:left;color:white;transition:.2s
+    }
+    .problem:hover,.problem.active{border-color:var(--accent);background:#131811}
+    .problem .icon{font-size:25px}.problem strong{display:block;margin-top:14px}.problem small{color:var(--muted)}
+    .diagnostic-result{display:none;margin-top:18px;padding:17px;border:1px solid rgba(201,255,50,.3);background:rgba(201,255,50,.05);border-radius:15px;color:#d8e8bf}
+
+    /* Why */
+    .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .why-image{
+      min-height:560px;border-radius:30px;border:1px solid var(--line);
+      background:url("https://images.unsplash.com/photo-1632823469850-1f77f0f0c5e6?auto=format&fit=crop&w=1200&q=85") center/cover;
+      box-shadow:var(--shadow)
+    }
+    .benefits{display:grid;gap:15px;margin-top:28px}
+    .benefit{display:grid;grid-template-columns:48px 1fr;gap:15px;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+    .benefit-icon{width:42px;height:42px;border-radius:13px;background:#192017;color:var(--accent);display:grid;place-items:center;font-size:20px}
+    .benefit h3{font-size:1rem;letter-spacing:-.02em}.benefit p{font-size:.82rem;color:var(--muted);margin-top:4px}
+
+    /* Reviews */
+    .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+    .review{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:24px}
+    .stars{color:var(--accent);letter-spacing:2px}.review p{color:#d0d5da;margin:18px 0;line-height:1.65}
+    .reviewer{display:flex;align-items:center;gap:11px}.avatar{width:38px;height:38px;border-radius:50%;background:#252a30;display:grid;place-items:center;font-weight:900}
+    .reviewer small{color:var(--muted)}
+
+    /* CTA */
+    .cta{
+      background:linear-gradient(135deg,#17200f,#0f1310 55%,#111417);
+      border:1px solid #2c3a20;border-radius:30px;padding:65px;
+      display:flex;justify-content:space-between;gap:30px;align-items:center
+    }
+    .cta h2{font-size:clamp(2rem,4vw,3.6rem)}.cta p{color:#b2baaf;margin-top:10px}
+
+    /* Footer */
+    footer{padding:70px 0 110px;border-top:1px solid var(--line);margin-top:96px}
+    .footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px}
+    .footer-brand p{color:var(--muted);max-width:330px;margin-top:15px;font-size:.88rem}
+    footer h4{margin-bottom:14px}footer ul{list-style:none;display:grid;gap:9px}footer li,footer a{color:var(--muted);font-size:.85rem}footer a:hover{color:var(--accent)}
+    .copyright{border-top:1px solid var(--line);margin-top:45px;padding-top:20px;color:#666f78;font-size:.78rem;display:flex;justify-content:space-between;gap:20px}
+
+    /* Sticky mobile */
+    .mobile-bar{display:none}
+    .toast{
+      position:fixed;right:20px;bottom:25px;z-index:100;background:#171b1f;color:white;
+      border:1px solid #394049;padding:14px 17px;border-radius:14px;box-shadow:var(--shadow);
+      transform:translateY(130px);opacity:0;transition:.3s;font-size:.86rem
+    }
+    .toast.show{transform:translateY(0);opacity:1}
+
+    @media(max-width:950px){
+      .nav-links{display:none}.menu{display:block}
+      .hero-grid,.why-grid{grid-template-columns:1fr}.hero{min-height:auto;padding-top:130px}
+      .booking-card{max-width:650px}
+      .services-grid{grid-template-columns:repeat(2,1fr)}
+      .trust-grid{grid-template-columns:repeat(2,1fr)}.trust-item:nth-child(2){border-right:0}.trust-item{border-bottom:1px solid var(--line)}
+      .problem-grid{grid-template-columns:repeat(2,1fr)}
+      .reviews-grid{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1.5fr 1fr 1fr}
+      .footer-grid>div:last-child{display:none}
+      .cta{padding:45px}
+    }
+    @media(max-width:600px){
+      .container{width:min(var(--max),calc(100% - 28px))}
+      .section{padding:70px 0}.section-head{display:block;margin-bottom:28px}.section-head .lead{margin-top:12px}
+      .hero h1{font-size:clamp(3rem,16vw,4.5rem)}
+      .hero-copy{font-size:1rem}.hero-actions .btn{width:100%}
+      .form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}
+      .services-grid,.problem-grid{grid-template-columns:1fr}
+      .trust-item{padding:19px 8px}.trust-item strong{font-size:.95rem}
+      .why-image{min-height:390px}
+      .cta{display:block;padding:35px 25px}.cta .btn{width:100%;margin-top:25px}
+      .footer-grid{grid-template-columns:1fr 1fr}.footer-brand{grid-column:1/-1}
+      .copyright{display:block}.copyright span{display:block;margin-top:8px}
+      .mobile-bar{
+        display:grid;grid-template-columns:1fr 1fr 1.15fr;position:fixed;bottom:0;left:0;right:0;z-index:80;
+        background:rgba(10,12,14,.96);backdrop-filter:blur(16px);border-top:1px solid var(--line);padding:8px;
+      }
+      .mobile-bar a{padding:11px 4px;text-align:center;font-size:.72rem;font-weight:850;border-right:1px solid var(--line)}
+      .mobile-bar a:last-child{border:0;background:var(--accent);color:#090b09;border-radius:12px}
+      body{padding-bottom:68px}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="#top" aria-label="Apex Auto Care home">
+      <span class="brand-mark">A</span>
+      <span>APEX AUTO CARE</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#diagnostic">What's Wrong?</a>
+      <a href="#why-us">Why Us</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn-primary btn-small" href="#booking">Book Service</a>
+    </nav>
+    <button class="menu" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Professional Automotive Care</span>
+        <h1>Your car.<br><span>Our expertise.</span><br>Back on the road.</h1>
+        <p class="hero-copy">Modern diagnostics, servicing and repairs from technicians who treat your vehicle like it matters.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#booking">🔧 Book a Service</a>
+          <a class="btn" href="https://wa.me/27000000000?text=Hi%20Apex%20Auto%20Care%2C%20I'd%20like%20help%20with%20my%20car." target="_blank" rel="noopener">💬 WhatsApp Us</a>
+        </div>
+        <div class="micro-trust">
+          <span>★ <b>4.9/5</b> customer rating</span>
+          <span>✓ Transparent service</span>
+          <span>⚡ Fast turnaround</span>
+        </div>
+      </div>
+
+      <div class="booking-card" id="booking">
+        <span class="eyebrow">Quick booking</span>
+        <h3>Tell us what your car needs.</h3>
+        <p>Send your details and we'll get back to you with the next step.</p>
+        <form id="bookingForm">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Your name</label>
+              <input id="name" name="name" required placeholder="John Smith">
+            </div>
+            <div class="field">
+              <label for="phone">Phone / WhatsApp</label>
+              <input id="phone" name="phone" required placeholder="+27 ...">
+            </div>
+            <div class="field">
+              <label for="vehicle">Vehicle</label>
+              <input id="vehicle" name="vehicle" placeholder="Toyota Corolla">
+            </div>
+            <div class="field">
+              <label for="service">Service needed</label>
+              <select id="service" name="service">
+                <option>General Service</option>
+                <option>Diagnostics</option>
+                <option>Brake Repair</option>
+                <option>Engine Repair</option>
+                <option>AC Repair</option>
+                <option>Electrical</option>
+                <option>Tyres & Suspension</option>
+                <option>Not sure</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="message">What's happening?</label>
+              <textarea id="message" name="message" placeholder="Describe the problem, warning light, noise, etc."></textarea>
+            </div>
+            <div class="field full">
+              <button class="btn btn-primary" type="submit">Request My Service →</button>
+            </div>
+          </div>
+          <div class="form-note">By submitting, you agree that the workshop may contact you about your request.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="container trust-grid">
+      <div class="trust-item"><strong>4.9/5</strong><span>Customer rating</span></div>
+      <div class="trust-item"><strong>All Makes</strong><span>Cars & light vehicles</span></div>
+      <div class="trust-item"><strong>Experienced</strong><span>Skilled technicians</span></div>
+      <div class="trust-item"><strong>Clear Quotes</strong><span>No surprise communication</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">What we do</span>
+          <h2>Everything your car needs. In one place.</h2>
+        </div>
+        <p class="lead">From routine maintenance to difficult faults, make your next repair easier.</p>
+      </div>
+      <div class="services-grid">
+        <a class="service" href="#booking" onclick="setService('General Service')">
+          <div class="service-icon">🛠️</div><div><h3>Car Service</h3><p>Routine maintenance to keep your vehicle running reliably.</p></div><span class="arrow">Get a quote →</span>
+        </a>
+        <a class="service" href="#booking" onclick="setService('Diagnostics')">
+          <div class="service-icon">🔎</div><div><h3>Diagnostics</h3><p>Find the cause behind warning lights and vehicle faults.</p></div><span class="arrow">Get a quote →</span>
+        </a>
+        <a class="service" href="#booking" onclick="setService('Brake Repair')">
+          <div class="service-icon">🛑</div><div><h3>Brakes</h3><p>Inspection and repair for braking-system problems.</p></div><span class="arrow">Get a quote →</span>
+        </a>
+        <a class="service" href="#booking" onclick="setService('Engine Repair')">
+          <div class="service-icon">⚙️</div><div><h3>Engine Repair</h3><p>Professional troubleshooting and mechanical repairs.</p></div><span class="arrow">Get a quote →</span>
+        </a>
+        <a class="service" href="#booking" onclick="setService('AC Repair')">
+          <div class="service-icon">❄️</div><div><h3>Air Conditioning</h3><p>Stay comfortable with AC checks, service and repairs.</p></div><span class="arrow">Get a quote →</span>
+        </a>
+        <a class="service" href="#booking" onclick="setService('Electrical')">
+          <div class="service-icon">🔋</div><div><h3>Electrical</h3><p>Battery, starting, charging and electrical fault diagnosis.</p></div><span class="arrow">Get a quote →</span>
+        </a>
+        <a class="service" href="#booking" onclick="setService('Tyres & Suspension')">
+          <div class="service-icon">🛞</div><div><h3>Tyres & Suspension</h3><p>Handling, ride and tyre-related checks and repairs.</p></div><span class="arrow">Get a quote →</span>
+        </a>
+        <a class="service" href="#booking" onclick="setService('Not sure')">
+          <div class="service-icon">❓</div><div><h3>Not Sure?</h3><p>Tell us what the car is doing and we'll help identify the next step.</p></div><span class="arrow">Tell us →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section diagnostic" id="diagnostic">
+    <div class="container">
+      <span class="eyebrow">Start with the symptom</span>
+      <h2>What's happening with your car?</h2>
+      <p class="lead" style="margin-top:14px">Choose the closest match. You don't need to know the technical name.</p>
+      <div class="problem-grid">
+        <button class="problem" onclick="problem(this,'My car won’t start')"><span class="icon">🚫</span><strong>It won't start</strong><small>Click for next step</small></button>
+        <button class="problem" onclick="problem(this,'A warning light is on')"><span class="icon">⚠️</span><strong>Warning light</strong><small>Click for next step</small></button>
+        <button class="problem" onclick="problem(this,'The brakes feel different')"><span class="icon">🛑</span><strong>Brake problem</strong><small>Click for next step</small></button>
+        <button class="problem" onclick="problem(this,'The AC is not cooling')"><span class="icon">❄️</span><strong>AC isn't cooling</strong><small>Click for next step</small></button>
+        <button class="problem" onclick="problem(this,'There is a strange noise')"><span class="icon">🔊</span><strong>Strange noise</strong><small>Click for next step</small></button>
+        <button class="problem" onclick="problem(this,'The car feels different')"><span class="icon">🚗</span><strong>Something feels wrong</strong><small>Click for next step</small></button>
+      </div>
+      <div class="diagnostic-result" id="diagnosticResult"></div>
+    </div>
+  </section>
+
+  <section class="section" id="why-us">
+    <div class="container why-grid">
+      <div class="why-image" role="img" aria-label="Mechanic working on a vehicle"></div>
+      <div>
+        <span class="eyebrow">Why drivers choose us</span>
+        <h2 style="margin-top:16px">Professional work without the garage guesswork.</h2>
+        <p class="lead" style="margin-top:16px">The best mechanic experience is one where you understand what's happening with your car and what comes next.</p>
+        <div class="benefits">
+          <div class="benefit"><div class="benefit-icon">✓</div><div><h3>Clear communication</h3><p>We explain the issue and recommended work in plain language.</p></div></div>
+          <div class="benefit"><div class="benefit-icon">⌕</div><div><h3>Modern diagnostics</h3><p>Use the right diagnostic process instead of guessing at the problem.</p></div></div>
+          <div class="benefit"><div class="benefit-icon">↗</div><div><h3>Service updates</h3><p>Keep customers informed about progress and recommended next steps.</p></div></div>
+          <div class="benefit"><div class="benefit-icon">★</div><div><h3>Built on trust</h3><p>Professional presentation, honest communication and quality workmanship.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="reviews">
+    <div class="container">
+      <div class="section-head">
+        <div><span class="eyebrow">Customer feedback</span><h2>Don't just take our word for it.</h2></div>
+        <p class="lead">Replace these sample reviews with verified customer testimonials from your workshop.</p>
+      </div>
+      <div class="reviews-grid">
+        <article class="review"><div class="stars">★★★★★</div><p>“Fast communication, professional service and they explained exactly what needed attention. I knew what I was paying for.”</p><div class="reviewer"><div class="avatar">TM</div><div><strong>Thabo M.</strong><br><small>Verified customer</small></div></div></article>
+        <article class="review"><div class="stars">★★★★★</div><p>“I brought the car in for a warning light. The team diagnosed the issue and kept me updated throughout the repair.”</p><div class="reviewer"><div class="avatar">LN</div><div><strong>Linda N.</strong><br><small>Verified customer</small></div></div></article>
+        <article class="review"><div class="stars">★★★★★</div><p>“A much easier experience than the usual garage visit. Booking was simple and the communication was excellent.”</p><div class="reviewer"><div class="avatar">KB</div><div><strong>Kevin B.</strong><br><small>Verified customer</small></div></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" id="contact">
+    <div class="cta">
+      <div><span class="eyebrow">Ready when you are</span><h2>Let's get your car back on the road.</h2><p>Book online, call the workshop or message us on WhatsApp.</p></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-primary" href="#booking">Book Service →</a><a class="btn" href="tel:+27000000000">📞 Call Workshop</a></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top"><span class="brand-mark">A</span><span>APEX AUTO CARE</span></a>
+        <p>A modern automotive service experience built around trust, clear communication and quality workmanship.</p>
+      </div>
+      <div><h4>Services</h4><ul><li><a href="#services">Car Service</a></li><li><a href="#services">Diagnostics</a></li><li><a href="#services">Brakes</a></li><li><a href="#services">Engine Repair</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li>Mon–Sat: 08:00–17:00</li><li><a href="tel:+27000000000">+27 00 000 0000</a></li><li><a href="https://wa.me/27000000000" target="_blank" rel="noopener">WhatsApp</a></li><li>Your City, South Africa</li></ul></div>
+      <div><h4>Quick links</h4><ul><li><a href="#booking">Book Service</a></li><li><a href="#diagnostic">What's Wrong?</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#contact">Location</a></li></ul></div>
+    </div>
+    <div class="copyright"><span>© <span id="year"></span> Apex Auto Care. All rights reserved.</span><span>Built for conversion • Mobile-first • Fast contact</span></div>
+  </div>
+</footer>
+
+<div class="mobile-bar">
+  <a href="tel:+27000000000">📞<br>CALL</a>
+  <a href="https://wa.me/27000000000" target="_blank" rel="noopener">💬<br>WHATSAPP</a>
+  <a href="#booking">🔧<br>BOOK NOW</a>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const toast = document.getElementById('toast');
+
+  function showToast(message){
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'),3200);
+  }
+
+  function setService(service){
+    const select = document.getElementById('service');
+    [...select.options].forEach(option=>{
+      if(option.value === service || option.text === service) select.value = option.value;
+    });
+  }
+
+  function problem(button, text){
+    document.querySelectorAll('.problem').forEach(x=>x.classList.remove('active'));
+    button.classList.add('active');
+    const result = document.getElementById('diagnosticResult');
+    result.style.display='block';
+    result.innerHTML = `<strong>Good starting point:</strong> ${text}. We recommend telling the technician exactly what you're experiencing. <a href="#booking" style="color:var(--accent);font-weight:800">Request help →</a>`;
+  }
+
+  function toggleMenu(){
+    const nav = document.querySelector('.nav-links');
+    const visible = getComputedStyle(nav).display !== 'none';
+    if(visible){nav.style.display='none';return;}
+    nav.style.display='flex';
+    nav.style.position='absolute';
+    nav.style.top='70px';
+    nav.style.left='14px';
+    nav.style.right='14px';
+    nav.style.padding='18px';
+    nav.style.flexDirection='column';
+    nav.style.alignItems='stretch';
+    nav.style.background='#101317';
+    nav.style.border='1px solid var(--line)';
+    nav.style.borderRadius='18px';
+  }
+
+  document.getElementById('bookingForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const data = new FormData(this);
+    const message =
+      `Hi Apex Auto Care, I'd like to book a service.%0A%0A` +
+      `Name: ${encodeURIComponent(data.get('name'))}%0A` +
+      `Phone: ${encodeURIComponent(data.get('phone'))}%0A` +
+      `Vehicle: ${encodeURIComponent(data.get('vehicle'))}%0A` +
+      `Service: ${encodeURIComponent(data.get('service'))}%0A` +
+      `Problem: ${encodeURIComponent(data.get('message'))}`;
+    window.open(`https://wa.me/27000000000?text=${message}`,'_blank');
+    showToast('Opening WhatsApp with your service request…');
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
